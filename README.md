@@ -3,8 +3,12 @@
 This is an experimental project for a Go-base AI Agent Sofware Development Kit (SDK).
 
 > An AI agent is a system that perceives its environment, processes that information, and takes actions to achieve specific goals. It’s called an “agent” because it acts on behalf of something or someone, guided by some level of autonomy or intelligence.
->
-> An Agent SDK is a toolkit or framework that provides abstractions, components, and utilities to help developers easily build and deploy LLM-powered agents.
+
+## Project Scope
+
+`go-bond` is an AI Agent SDK: a toolkit or framework that provides abstractions, components, and utilities to help developers easily build and deploy LLM-powered agents.
+
+> This is only an experimental project to see how far Go can be used to create AI Agent SDK.
 
 ## Disclaimer
 
