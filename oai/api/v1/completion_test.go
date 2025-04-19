@@ -189,3 +189,111 @@ func TestCompletionResponseUnmarshal(t *testing.T) {
 		})
 	}
 }
+
+/*
+Non-streaming response:
+
+"top_logprobs": [
+    {"The": -0.1, "A": -1.2, "An": -1.5},
+    {" quick": -0.2, " fast": -0.4},
+    {" brown": -0.05, " red": -0.3}
+]
+
+{
+  "id": "cmpl-l0pk7fjnk8u19mdipt2b",
+  "object": "text_completion",
+  "created": 1745045979,
+  "model": "gemma-2-2b-it",
+  "choices": [
+    {
+      "index": 0,
+      "text": "\n\n<ul>\n<li>Bitcoin</li>\n<li>Ethereum</li>\n<li>Cardano</li>\n</ul>\n\n\nPlease note that this is just a sample code, and you can customize it to your needs. \n",
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 19,
+    "completion_tokens": 55,
+    "total_tokens": 74
+  },
+  "stats": {}
+}
+*/
+
+/*
+Streaming response:
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"\n\n","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"<","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"ul","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":">","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"\n","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"  ","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"<","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"li","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":">","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"Bitcoin","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"</","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"li","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":">","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"\n","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"  ","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"<","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"li","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":">","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"Ethereum","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"</","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"li","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":">","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"\n","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"  ","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"<","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"li","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":">","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"Polygon","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"</","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"li","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":">","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"\n","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"</","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"ul","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":">","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"\n\n\n","logprobs":null,"finish_reason":null}]}
+
+data: {"id":"cmpl-0de9bf5bwox7ggxc9jiaqxj","object":"text_completion","created":1745045451,"model":"gemma-2-2b-it","choices":[{"index":0,"text":"","logprobs":null,"finish_reason":"stop"}]}
+*/
